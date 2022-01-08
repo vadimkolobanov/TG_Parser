@@ -1,6 +1,6 @@
 import configparser
 from telethon import TelegramClient
-import Users,Messages
+import Users,Messages,AboutMe
 from telethon.tl.functions.channels import GetParticipantsRequest
 from telethon.tl.types import ChannelParticipantsSearch
 from tqdm import tqdm
@@ -16,7 +16,7 @@ client.start()
 
 async def main():
 
-    menu = input('Выберите пункт меню:\n 1 - Получить список пользователей \n 2 - Получить сообщения \n ')
+    menu = input('Выберите пункт меню:\n 1 - Получить список пользователей \n 2 - Получить сообщения \n 3 - Получить контакты ')
     with open("links.txt", "r") as f:
         while True:
             try:
@@ -29,6 +29,8 @@ async def main():
                                                   client, GetParticipantsRequest, tqdm)
                 elif menu =='2':
                     await Messages.message_load(channel,client)
+                elif menu =='3':
+                    await AboutMe.getcontacts(client)
                 else:
                     print('Некорректный ввод')
                     await main()
